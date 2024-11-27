@@ -3,30 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy New Year!</title>
+    <title>Happy New Year Celebration</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #282c34;
-            color: white;
+            background-color: yellow;
             font-family: Arial, sans-serif;
             text-align: center;
+            overflow: hidden;
+            margin: 0;
+            height: 100vh;
         }
-        h1 {
-            font-size: 3em;
+
+        .container {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        p {
-            font-size: 1.5em;
+
+        .message {
+            font-size: 3rem;
+            color: #ff00c3;
+            margin-bottom: 20px;
+        }
+
+        #fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .firework {
+            position: absolute;
+            bottom: 0;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            animation: explode 1s forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(3);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
-    <div>
-        <h1>Happy New Year!</h1>
-        <p>Wishing you a year filled with peace, joy, and happiness!</p>
+    <div class="container">
+        <h1 class="message">Happy New Year 2024!</h1>
+        <button id="celebrateBtn">Celebrate!</button>
+        <div id="fireworks"></div>
     </div>
+    <script>
+        document.getElementById('celebrateBtn').addEventListener('click', function() {
+            createFireworks();
+        });
+
+        function createFireworks() {
+            const fireworksContainer = document.getElementById('fireworks');
+            for (let i = 0; i < 10; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = Math.random() * 100 + 'vw';
+                firework.style.animationDuration = Math.random() * 2 + 1 + 's';
+                fireworksContainer.appendChild(firework);
+                
+                setTimeout(() => {
+                    firework.remove();
+                }, 2000);
+            }
+        }
+    </script>
 </body>
 </html>
