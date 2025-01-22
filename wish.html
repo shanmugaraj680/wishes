@@ -1,0 +1,125 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Birthday Wishes for John
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   @keyframes confetti {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff0;
+            animation: confetti 5s linear infinite;
+        }
+        .ribbon {
+            position: absolute;
+            width: 5px;
+            height: 20px;
+            background-color: #ff0;
+            animation: confetti 5s linear infinite;
+        }
+        @keyframes fireworks {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ff0;
+            animation: fireworks 1s ease-out infinite;
+        }
+  </style>
+ </head>
+ <body class="flex items-center justify-center h-screen bg-blue-500">
+  <div class="text-center">
+   <h1 class="text-4xl font-bold text-white mb-4" id="birthday-heading">
+    Happy Birthday, John!
+   </h1>
+   <p class="text-xl text-white mb-6" id="wish">
+    Wishing you a day filled with love and joy!
+   </p>
+   <img alt="A beautifully wrapped gift box with a ribbon" class="mx-auto mb-6" height="300" src="https://storage.googleapis.com/a1aa/image/d3NEDF23GSp1ElyJ45BKZ4VZgEHex5ug5Khx9ZVHJsZ3OwDKA.jpg" width="300"/>
+   <button class="bg-white text-blue-500 px-4 py-2 rounded-full font-bold" onclick="startCelebration()">
+    Start Celebration
+   </button>
+  </div>
+  <script>
+   const bday_name = "JOHN";
+        const wishes = [
+            `Wishing you a day filled with love and joy, ${bday_name}!`,
+            `May your birthday be as special as you are, ${bday_name}!`,
+            `Happy Birthday, ${bday_name}! Enjoy your special day!`,
+            `Here's to another year of amazing adventures, ${bday_name}!`,
+            `May all your dreams come true on your birthday, ${bday_name}!`,
+            `Happy Birthday, ${bday_name}! Have a fantastic day!`,
+            `Wishing you a year filled with happiness and success, ${bday_name}!`,
+            `Happy Birthday, ${bday_name}! Celebrate and enjoy your day!`,
+            `May your birthday be the start of a wonderful year, ${bday_name}!`,
+            `Happy Birthday, ${bday_name}! Cheers to you!`
+        ];
+
+        document.getElementById('birthday-heading').innerText = `Happy Birthday, ${bday_name}!`;
+
+        function getRandomWish() {
+            return wishes[Math.floor(Math.random() * wishes.length)];
+        }
+
+        function changeBackgroundColor() {
+            const colors = ['bg-blue-500', 'bg-red-500', 'bg-green-500', 'bg-yellow-500', 'bg-purple-500'];
+            const currentColor = document.body.classList[3];
+            let newColor = colors[Math.floor(Math.random() * colors.length)];
+            while (newColor === currentColor) {
+                newColor = colors[Math.floor(Math.random() * colors.length)];
+            }
+            document.body.classList.replace(currentColor, newColor);
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = `${Math.random() * 100}vw`;
+            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+        }
+
+        function createRibbon() {
+            const ribbon = document.createElement('div');
+            ribbon.classList.add('ribbon');
+            ribbon.style.left = `${Math.random() * 100}vw`;
+            ribbon.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(ribbon);
+            setTimeout(() => ribbon.remove(), 5000);
+        }
+
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            firework.style.left = `${Math.random() * 100}vw`;
+            firework.style.top = `${Math.random() * 100}vh`;
+            firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(firework);
+            setTimeout(() => firework.remove(), 1000);
+        }
+
+        function startCelebration() {
+            document.getElementById('wish').innerText = getRandomWish();
+            setInterval(changeBackgroundColor, 1000);
+            setInterval(createConfetti, 200);
+            setInterval(createRibbon, 300);
+            setInterval(createFirework, 500);
+        }
+  </script>
+ </body>
+</html>
