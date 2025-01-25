@@ -1,0 +1,106 @@
+<html>
+ <head>
+  <title>
+   Birthday Wishes Card
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Pacifico', cursive;
+            overflow: hidden;
+        }
+        .falling-item {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            animation: fall 5s linear infinite;
+        }
+        @keyframes fall {
+            0% { top: -50px; }
+            100% { top: 100vh; }
+        }
+  </style>
+  <script>
+   function changeCardBackgroundColors() {
+            const colors = ['bg-blue-100', 'bg-pink-100', 'bg-yellow-100', 'bg-green-100', 'bg-purple-100'];
+            let index = 0;
+            setInterval(() => {
+                document.getElementById('card').className = 'bg-white rounded-lg shadow-lg p-4 max-w-sm text-center ' + colors[index];
+                index = (index + 1) % colors.length;
+            }, 1000);
+        }
+
+        function createFallingItems() {
+            const items = [
+                { src: 'https://e7.pngegg.com/pngimages/399/447/png-clipart-red-apple-illustration-juice-apple-fruit-graphy-red-apple-natural-foods-food-thumbnail.png', alt: 'A falling apple' },
+                { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsvVVFXfiiNk5t69ji-bMgUQvhxThXcph6vbJtMhcT8pGkiVQp0mLEXU4&s', alt: 'A falling chocolate' },
+                { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpMhq-cImNjoH2f5HlistQAIx2c8cX-gpY3d-xb7QZ3qxbg1Nv4kviZT_2eMGlAOnGQYfjzw&s', alt: 'A falling balloon' },
+                { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfUKKq0zshlSr29itpDV_qXv5vKlBpQqUEQB7cyTtO9s9CB0tCPHzJNDmIzFLhxCKjKnY&usqp=CAU', alt: 'A falling rose' }
+            ];
+            const container = document.createElement('div');
+            container.className = 'falling-items-container';
+            document.body.appendChild(container);
+
+            for (let i = 0; i < 50; i++) {
+                const item = document.createElement('img');
+                const randomItem = items[Math.floor(Math.random() * items.length)];
+                item.src = randomItem.src;
+                item.alt = randomItem.alt;
+                item.className = 'falling-item';
+                item.style.left = `${Math.random() * 100}vw`;
+                item.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                container.appendChild(item);
+            }
+        }
+
+        function getRandomPositiveNote() {
+            const notes = [
+                "You are amazing just the way you are!",
+                "Believe in yourself and all that you are.",
+                "You are capable of incredible things.",
+                "Stay positive, work hard, make it happen.",
+                "Your potential is endless."
+            ];
+            return notes[Math.floor(Math.random() * notes.length)];
+        }
+
+        function celebrate() {
+            changeCardBackgroundColors();
+            createFallingItems();
+            document.getElementById('positive-note').innerText = getRandomPositiveNote();
+        }
+  </script>
+ </head>
+ <body class="bg-blue-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white rounded-lg shadow-lg p-4 max-w-sm text-center" id="card">
+   <img alt="A colorful birthday banner with the text 'Happy Birthday' in a playful font" class="w-full rounded-t-lg" height="200" src="https://storage.googleapis.com/a1aa/image/13y5ejjllF3DIqnnP01Wuw4Lb15MNKia2CVCofGLwouofJRoA.jpg" width="600"/>
+   <h1 class="text-3xl text-pink-500 mt-4">
+    Happy Birthday, JOHN!
+   </h1>
+   <p class="text-gray-700 mt-4">
+    Wishing you a day filled with love, joy, and all your favorite things. May your year ahead be as wonderful as you are!
+   </p>
+   <p class="text-gray-500 mt-2">
+    Birthday Date: 01/01/2022
+   </p>
+   <div class="mt-6">
+    <img alt="A decorative image of a birthday cake with candles" class="mx-auto" height="100" src="https://storage.googleapis.com/a1aa/image/ymmV93Yo5g7pPxAT1j7YdRxdPcp4sLlGnGmTXzFrb3z5PJCF.jpg" width="100"/>
+   </div>
+   <div class="mt-6">
+    <p class="text-gray-700" id="positive-note">
+     <!-- Positive note will be inserted here -->
+    </p>
+   </div>
+   <div class="mt-6">
+    <button class="bg-green-500 text-white px-4 py-2 rounded-full shadow hover:bg-green-600 transition duration-300" onclick="celebrate()">
+     <i class="fas fa-birthday-cake mr-2">
+     </i>
+     Celebrate
+    </button>
+   </div>
+  </div>
+ </body>
+</html>
